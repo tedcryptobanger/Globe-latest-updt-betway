@@ -1,0 +1,83 @@
+:root { --bw-green: #009241; --bw-btn-green: #00a100; --bw-dark: #1a1a1a; --bw-bg-gray: #212121 }
+.view { display: none; height: 100%; overflow-y: auto }
+.view.active { display: flex!important }
+body, html { margin: 0; padding: 0; font-family: Helvetica,Arial,sans-serif; background-color: var(--bw-dark); color: #fff; height: 100vh; overflow: hidden }
+#loading-view, #process-overlay { background-color: var(--bw-bg-gray); position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center }
+#process-overlay { display: none; background: rgba(0,0,0,.95) }
+.loader-logo { font-size: 40px; font-weight: 900; letter-spacing: -2px; text-transform: lowercase; margin-bottom: 20px }
+.spinner { width: 30px; height: 30px; border: 4px solid rgba(255,255,255,.1); border-top: 4px solid #fff; border-radius: 50%; animation: spin .8s linear infinite }
+@keyframes spin { 100% { transform: rotate(360deg) } }
+header { background: #000; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center }
+.logo-main { font-weight: 900; font-size: 24px; letter-spacing: -1px; text-transform: lowercase }
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 2000; display: flex; align-items: start; justify-content: center; padding-top: 20px; overflow-y: auto }
+.modal-container { background: #f4f4f4; width: 92%; max-width: 400px; border-radius: 4px; overflow: hidden; margin-bottom: 60px }
+.modal-header { background: #000; color: #fff; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 18px }
+.modal-body { padding: 20px 16px; color: #333 }
+
+/* Floating Material Inputs CSS */
+.mat-wrap { position: relative; margin-bottom: 28px; background: #fff; border-radius: 4px; }
+.mat-input { width: 100%; padding: 14px 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 16px; color: #333; background: transparent; outline: none; transition: border-color 0.2s; }
+.mat-input:focus { border-color: var(--bw-green); }
+.mat-label { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); background: #fff; padding: 0 4px; color: #666; transition: 0.2s ease all; pointer-events: none; font-size: 16px; z-index: 10; margin: 0; }
+.mat-wrap.focused .mat-label { top: 0; font-size: 13px; color: var(--bw-green); }
+.mat-prefix { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #333; display: none; z-index: 5; }
+.mat-wrap.has-prefix.focused .mat-prefix { display: block; }
+.mat-wrap.has-prefix.focused .mat-input { padding-left: 46px; }
+.mat-wrap .pw-eye { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #333; cursor: pointer; font-size: 18px; z-index: 10; }
+.error-text { display: none; color: #d93025; font-size: 13px; margin-top: 4px; text-align: left; position: absolute; bottom: -20px; left: 0; }
+.mat-wrap.error .mat-input { border-color: #d93025 !important; }
+.mat-wrap.error .mat-label { color: #d93025 !important; }
+.mat-wrap.error .mat-prefix { color: #d93025; }
+.mat-wrap.error .pw-eye { color: #d93025; }
+.mat-wrap.error .error-text { display: block; }
+
+.modal-body input:not(.mat-input), .modal-body select { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 16px; color: #333 }
+.forgot-row { display: flex; justify-content: space-between; margin: 5px 0 20px; font-size: 14px; color: #333; cursor: pointer }
+.signup-promo-box { background: #fff; border: 1px solid #e0e0e0; padding: 15px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; color: #333; font-size: 14px }
+#login-error, #otp-error { display: none; background-color: #fdecea; color: #333; border: 1px solid #f5c2c7; border-radius: 4px; padding: 12px; margin-top: 15px; font-size: 14px; align-items: center }
+#login-error i, #otp-error i { color: #d93025; margin-right: 12px; font-size: 20px }
+.coupon-section { background: #e6e6e6; border-radius: 8px; padding: 12px; margin-top: 10px }
+.coupon-card { background: #fff; border-radius: 10px; display: flex; align-items: center; margin-bottom: 8px; overflow: hidden; height: 65px }
+.coupon-img { width: 60px; height: 100%; background: #111; display: flex; align-items: center; justify-content: center; padding: 5px }
+.coupon-info { padding-left: 12px; flex: 1 }
+.coupon-info h4 { margin: 0; font-size: 14px; color: #000 }
+.coupon-info p { margin: 2px 0 0; font-size: 11px; color: #666 }
+.coupon-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0 }
+.btn-later, .btn-accept { border: none; padding: 12px; border-radius: 4px; font-weight: 700; cursor: pointer }
+.btn-later { background: #000; color: #fff }
+.btn-accept { background: var(--bw-btn-green); color: #fff }
+.submit-btn { width: 100%; background: var(--bw-btn-green); color: #fff; padding: 14px; border: none; border-radius: 4px; font-weight: 700; font-size: 16px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: transform .1s }
+.submit-btn:active { transform: scale(.95) }
+
+/* Professional Banking Card Guides Styles */
+.card-guidelines { background: #e9f5ed; border-left: 4px solid var(--bw-green); padding: 10px 12px; font-size: 12px; color: #333; margin-bottom: 15px; border-radius: 0 4px 4px 0; }
+.card-guidelines ul { margin: 5px 0 0 15px; padding: 0; }
+.card-guidelines li { margin-bottom: 3px; }
+
+/* Maintenance View Specific Styles */
+#maintenance-view { background-color: #f2f2f2; color: #111; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.bars-container { display: flex; align-items: flex-end; justify-content: center; gap: 10px; height: 120px; margin-bottom: 30px; position: relative; }
+.bar { width: 18px; }
+.bar-1 { height: 25px; background: #8e44ad; }
+.bar-2 { height: 50px; background: #009988; }
+.bar-3 { height: 40px; background: #b3b3b3; position: relative; }
+.bar-3::after { content: ""; position: absolute; top: -25px; left: 5px; width: 15px; height: 25px; border: 2px solid #b3b3b3; border-bottom: none; border-right: none; border-radius: 50% 0 0 0; transform: rotate(-15deg); }
+.bar-4 { height: 60px; background: #b00040; }
+.bar-5 { height: 80px; background: #5bc0de; }
+.bar-6 { height: 100px; background: #0033a0; }
+.bar-7 { height: 120px; background: #00a826; }
+.jumper { position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 22px; color: #000; }
+.maint-title { font-size: 32px; font-weight: 800; margin: 0 0 10px; color: #222; letter-spacing: -0.5px; line-height: 1.1; }
+.maint-sub { font-size: 18px; color: #444; margin: 0 0 50px; }
+.betway-logo-maint { background: #1a1a1a; color: #fff; padding: 15px 45px; font-size: 32px; font-weight: 900; letter-spacing: -1.5px; transform: skew(-15deg); display: inline-block; }
+.betway-logo-maint span { display: block; transform: skew(15deg); }
+
+#chat-icon { position: fixed; bottom: 20px; right: 20px; background: var(--bw-green); width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,.4); z-index: 5000; cursor: pointer; border: 2px solid #fff }
+#chat-window { position: fixed; bottom: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 6000; display: none; flex-direction: column }
+#chat-header { background: #000; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; font-weight: 700 }
+#chat-msgs { flex: 1; padding: 15px; overflow-y: auto; background: #e5ddd5; display: flex; flex-direction: column }
+#chat-input-area { padding: 10px; background: #f0f0f0; display: flex; align-items: center; border-top: 1px solid #ccc }
+.msg-b { padding: 10px 14px; border-radius: 8px; margin-bottom: 8px; max-width: 85%; font-size: 14px; box-shadow: 0 1px 1px rgba(0,0,0,.1) }
+.msg-user { align-self: flex-end; background: #dcf8c6; color: #000 }
+.msg-agent { align-self: flex-start; background: #fff; color: #000 }
+.error-field { border: 2px solid #d93025!important; background-color: #fff8f8!important }
